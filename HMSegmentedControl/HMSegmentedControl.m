@@ -158,6 +158,9 @@
     self.selectionIndicatorBoxLayer = [CALayer layer];
     self.selectionIndicatorBoxLayer.opacity = 0.2;
     self.selectionIndicatorBoxLayer.borderWidth = 1.0f;
+
+    self.separatorLineSize = CGSizeZero;
+    self.separatorLineColor = [UIColor clearColor];
     
     self.contentMode = UIViewContentModeRedraw;
 }
@@ -251,6 +254,8 @@
             
             titleLayer.contentsScale = [[UIScreen mainScreen] scale];
             [self.scrollView.layer addSublayer:titleLayer];
+            
+            [self addSeparatorLineAtIndex:idx];
         }];
     } else if (self.type == HMSegmentedControlTypeImages) {
         [self.sectionImages enumerateObjectsUsingBlock:^(id iconImage, NSUInteger idx, BOOL *stop) {
@@ -276,6 +281,8 @@
             }
             
             [self.scrollView.layer addSublayer:imageLayer];
+            
+            [self addSeparatorLineAtIndex:idx];
         }];
     } else if (self.type == HMSegmentedControlTypeTextImages){
 		[self.sectionImages enumerateObjectsUsingBlock:^(id iconImage, NSUInteger idx, BOOL *stop) {
@@ -336,6 +343,7 @@
 			titleLayer.contentsScale = [[UIScreen mainScreen] scale];
             [self.scrollView.layer addSublayer:titleLayer];
 			
+            [self addSeparatorLineAtIndex:idx];
         }];
 	}
 
@@ -363,6 +371,27 @@
                 }
             }
         }
+    }
+}
+
+- (void)addSeparatorLineAtIndex:(NSUInteger)index {
+    if ( !CGSizeEqualToSize(_separatorLineSize, CGSizeZero) && index) {
+        CALayer *separatorLineLayer = [CALayer layer];
+        NSInteger sectionCount = [_sectionTitles count];
+        
+        if ( !sectionCount) {
+            sectionCount = [_sectionImages count];
+        }
+        
+        CGFloat originX = (self.scrollView.contentSize.width / sectionCount) * index - _separatorLineSize.width / 2;
+        CGFloat originY = (self.scrollView.contentSize.height - _separatorLineSize.height) / 2;
+        
+        CGRect frame = CGRectMake(originX, originY, _separatorLineSize.width, _separatorLineSize.height);
+        
+        [separatorLineLayer setFrame:frame];
+        [separatorLineLayer setBackgroundColor:_separatorLineColor.CGColor];
+        
+        [self.scrollView.layer addSublayer:separatorLineLayer];
     }
 }
 

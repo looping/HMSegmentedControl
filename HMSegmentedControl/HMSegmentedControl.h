@@ -161,6 +161,16 @@ typedef enum {
  */
 @property (nonatomic) BOOL shouldAnimateUserSelection;
 
+/*
+ Default is CGSizeZero. Set a separator line between each selection if the value is not equal to CGSizeZero.
+ */
+@property (nonatomic) CGSize separatorLineSize;
+
+/*
+ Default is [UIColor clearColor]. Set a separator line color if separatorLineSize is not equal to CGSizeZero.
+ */
+@property (nonatomic) UIColor *separatorLineColor;
+
 - (id)initWithSectionTitles:(NSArray *)sectiontitles;
 - (id)initWithSectionImages:(NSArray *)sectionImages sectionSelectedImages:(NSArray *)sectionSelectedImages;
 - (instancetype)initWithSectionImages:(NSArray *)sectionImages sectionSelectedImages:(NSArray *)sectionSelectedImages titlesForSections:(NSArray *)sectiontitles;
