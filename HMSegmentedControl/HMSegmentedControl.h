@@ -12,7 +12,9 @@ typedef void (^IndexChangeBlock)(NSInteger index);
 
 typedef enum {
     HMSegmentedControlSelectionStyleTextWidthStripe, // Indicator width will only be as big as the text width
+    HMSegmentedControlSelectionStyleTextWidthStripeWithArrow, // An arrow appears in 'TextWidthStripe'
     HMSegmentedControlSelectionStyleFullWidthStripe, // Indicator width will fill the whole segment
+    HMSegmentedControlSelectionStyleFullWidthStripeWithArrow, // An arrow appears in 'FullWidthStripe'
     HMSegmentedControlSelectionStyleBox, // A rectangle that covers the whole segment
     HMSegmentedControlSelectionStyleArrow // An arrow in the middle of the segment pointing up or down depending on `HMSegmentedControlSelectionIndicatorLocation`
 } HMSegmentedControlSelectionStyle;
