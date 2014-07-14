@@ -376,7 +376,6 @@
 
 - (void)addSeparatorLineAtIndex:(NSUInteger)index {
     if ( !CGSizeEqualToSize(_separatorLineSize, CGSizeZero) && index) {
-        CALayer *separatorLineLayer = [CALayer layer];
         NSInteger sectionCount = [_sectionTitles count];
         
         if ( !sectionCount) {
@@ -388,10 +387,19 @@
         
         CGRect frame = CGRectMake(originX, originY, _separatorLineSize.width, _separatorLineSize.height);
         
-        [separatorLineLayer setFrame:frame];
-        [separatorLineLayer setBackgroundColor:_separatorLineColor.CGColor];
-        
-        [self.scrollView.layer addSublayer:separatorLineLayer];
+        if (_separatorLineImage) {
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:_separatorLineImage];
+            [imageView setFrame:frame];
+            
+            [self.scrollView addSubview:imageView];
+        } else {
+            CALayer *separatorLineLayer = [CALayer layer];
+            
+            [separatorLineLayer setFrame:frame];
+            [separatorLineLayer setBackgroundColor:_separatorLineColor.CGColor];
+            
+            [self.scrollView.layer addSublayer:separatorLineLayer];
+        }
     }
 }
 

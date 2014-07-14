@@ -171,6 +171,12 @@ typedef enum {
  */
 @property (nonatomic) UIColor *separatorLineColor;
 
+/*
+ Default is nil. Set a separator line image if separatorLineSize is not equal to CGSizeZero.
+ */
+@property (nonatomic) UIImage *separatorLineImage;
+
+
 - (id)initWithSectionTitles:(NSArray *)sectiontitles;
 - (id)initWithSectionImages:(NSArray *)sectionImages sectionSelectedImages:(NSArray *)sectionSelectedImages;
 - (instancetype)initWithSectionImages:(NSArray *)sectionImages sectionSelectedImages:(NSArray *)sectionSelectedImages titlesForSections:(NSArray *)sectiontitles;
