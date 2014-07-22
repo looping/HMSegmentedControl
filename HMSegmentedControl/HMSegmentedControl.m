@@ -161,7 +161,7 @@
 
     self.separatorLineSize = CGSizeZero;
     self.separatorLineColor = [UIColor clearColor];
-    
+    self.shouldEnableSeparatorLineShadow = NO;
     self.contentMode = UIViewContentModeRedraw;
 }
 
@@ -390,13 +390,21 @@
         if (_separatorLineImage) {
             UIImageView *imageView = [[UIImageView alloc] initWithImage:_separatorLineImage];
             [imageView setFrame:frame];
-            
+
             [self.scrollView addSubview:imageView];
         } else {
             CALayer *separatorLineLayer = [CALayer layer];
             
             [separatorLineLayer setFrame:frame];
             [separatorLineLayer setBackgroundColor:_separatorLineColor.CGColor];
+            
+            if (_shouldEnableSeparatorLineShadow) {
+                [separatorLineLayer setMasksToBounds:NO];
+                [separatorLineLayer setShadowColor:[UIColor darkGrayColor].CGColor];
+                [separatorLineLayer setShadowOffset:CGSizeMake(.5f, 0.f)];
+                [separatorLineLayer setShadowOpacity:.2f];
+                [separatorLineLayer setShadowRadius:0.f];
+            }
             
             [self.scrollView.layer addSublayer:separatorLineLayer];
         }

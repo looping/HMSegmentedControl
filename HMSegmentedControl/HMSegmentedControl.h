@@ -176,6 +176,11 @@ typedef enum {
  */
 @property (nonatomic) UIImage *separatorLineImage;
 
+/*
+ Default is NO. Set YES to add a shadow on the separator line. Will never add a shadow on 'separatorLineImage'.
+ */
+@property (nonatomic) BOOL shouldEnableSeparatorLineShadow;
+
 
 - (id)initWithSectionTitles:(NSArray *)sectiontitles;
 - (id)initWithSectionImages:(NSArray *)sectionImages sectionSelectedImages:(NSArray *)sectionSelectedImages;
